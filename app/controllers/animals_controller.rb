@@ -40,8 +40,11 @@ class AnimalsController < ApplicationController
     # it was deleted
     def destroy
         animal = Animal.find(params[:id])
-        if animal.destroy
+        animal.destroy
+        if animal.valid?
             render json: animal
+        else
+            render json: animal.errors
         end
     end
 
