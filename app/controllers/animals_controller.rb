@@ -36,6 +36,15 @@ class AnimalsController < ApplicationController
         end
     end
 
+    # Destroys an animal in the db. Returns the json for the animal if
+    # it was deleted
+    def destroy
+        animal = Animal.find(params[:id])
+        if animal.destroy
+            render json: animal
+        end
+    end
+
     private
     def animal_params
         params.require(:animal).permit(:common_name, :latin_name, :kingdom)
