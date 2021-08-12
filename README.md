@@ -25,6 +25,11 @@ Things you may want to cover:
 
 # Wildlife Tracker Challenge
 
+Left off at:
+
+- **Story**:  As the consumer of the API, I can run a report to list all sightings during a given time period.
+
+
 ### Set Up
 
 #### Creating a new Rails app:
@@ -85,7 +90,6 @@ class Animal < ApplicationRecord
     has_many :sightings
 end
 ```
-
 create method for sighting
 animal = Animal.find(params[:id])
 animal.sightings.create(date:params[:date], latitude:params[:latitude], longitude:params[:longitude])
