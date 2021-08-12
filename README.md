@@ -48,13 +48,10 @@ $ rails g resource Animal common_name:string latin_name:string kingdom:string
 ```
 
 - **Story**:  As the consumer of the API I can see all the animals in the database.
-  - *Hint*: Make a few animals using Rails Console
+  - *Hint*: Make a few animals using Rails Console `$ rails c`
 
-```
-$ rails c
-> .create(common_name:'tiger', latin_name:'panthera tigris', kingdom:'mammalia'
-> .create(common_name:'ponytail palm', latin_name:'beaucarnea recurvata', kingdom:'plantae')
-```
+`Animal.create(common_name:'tiger', latin_name:'panthera tigris', kingdom:'mammalia'`
+`Animal.create(common_name:'ponytail palm', latin_name:'beaucarnea recurvata', kingdom:'plantae')`
 
 See all the animals - REST => index
 
