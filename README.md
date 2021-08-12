@@ -75,10 +75,16 @@ $ rails db:migrate
 ```
 
 > app/models/sighting.rb
-add belongs_to :animal
+class Sighting < ApplicationRecord
+    belongs_to :animal
+end
 
 > app/models/animal.rb
-add has_many :sightings
+```
+class Animal < ApplicationRecord
+    has_many :sightings
+end
+```
 
 create method for sighting
 animal = Animal.find(params[:id])
