@@ -1,31 +1,24 @@
 class SightingsController < ApplicationController
 
     # List all sightings during a given time period
+    # GET: localhost:3000/sightings
     def index
         sightings = Sighting.where(date: params[:start_date]..params[:end_date])
         render json: sightings
     end
 
-    # show all sightings for an animal
-    # GET: localhost:3000/animals/:animal_id/sightings
+    # show all sightings with animal ID
+    # GET: localhost:3000/sightings/1
     # Use include to get associations as json
     # https://api.rubyonrails.org/classes/ActiveModel/Serializers/JSON.html#method-i-as_json
-    # def index
-    #     animal = Animal.find(params[:animal_id])
-    #     render json: animal.as_json(include: :sightings)
-    # end
+    def show
+        animal = Animal.find(params[:id])
+        render json: animal.as_json(include: :sightings)  
+    end
 
     # Creates a sighting for an animal with ID
-    # Postman: POST localhost:3000/animals/:animal_id/sightings
-    # {
-    #     "date": "2021-08-12T22:07:56.885Z",
-    #     "latitude": 482.221898,
-    #     "longitude": 234.094898989
-    # }
     def create
-        animal = Animal.find(params[:animal_id])
-        sighting = animal.sightings.create(sighting_params)
-
+        sighting = Sighting.create(sighting_params)
         if sighting.valid?
             render json: sighting
         else
@@ -34,7 +27,7 @@ class SightingsController < ApplicationController
     end
 
     # Updates a sighting
-    # PUT: localhost:3000/animals/1/sightings/:id
+    # PUT: localhost:3000/sightings/:id
     def update
         sighting = Sighting.find(params[:id])
         sighting.update(sighting_params)
@@ -47,7 +40,7 @@ class SightingsController < ApplicationController
         end
     end
 
-    # DELETE: /animals/1/sightings/:id
+    # DELETE: /sightings/:id
     def destroy
         sighting = Sighting.find(params[:id])
         sighting.destroy
@@ -60,7 +53,7 @@ class SightingsController < ApplicationController
 
     private
     def sighting_params
-        params.require(:sighting).permit(:date, :latitude, :longitude)
+        params.require(:sighting).permit(:date, :latitude, :longitude, :animal_id)
     end
 
 end
